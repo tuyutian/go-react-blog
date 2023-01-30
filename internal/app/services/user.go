@@ -3,11 +3,11 @@ package services
 import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
-	"maxotm/pkg/utils/ginparam"
-	"maxotm/pkg/utils/paginate"
-	"maxotm/server/response"
-	"maxotm/store/models"
-	"maxotm/store/repositories"
+	"tomaxut/pkg/utils/ginparam"
+	"tomaxut/pkg/utils/paginate"
+	"tomaxut/server/response"
+	"tomaxut/store/models"
+	"tomaxut/store/repositories"
 )
 
 type User struct {

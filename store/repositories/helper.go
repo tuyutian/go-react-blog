@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"maxotm/store/database"
+	"tomaxut/store/database"
 )
 
 type Helper struct {

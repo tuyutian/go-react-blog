@@ -3,7 +3,7 @@ package database
 import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"maxotm/config"
+	"tomaxut/config"
 )
 
 var DB *gorm.DB

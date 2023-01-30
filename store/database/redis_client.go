@@ -2,8 +2,8 @@ package database
 
 import (
 	"github.com/gomodule/redigo/redis"
-	"maxotm/config"
 	"time"
+	"tomaxut/config"
 )
 
 var Connect *redis.Pool

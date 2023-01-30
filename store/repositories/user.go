@@ -1,9 +1,9 @@
 package repositories
 
 import (
-	"maxotm/pkg/utils/paginate"
-	"maxotm/store/database"
-	"maxotm/store/models"
+	"tomaxut/pkg/utils/paginate"
+	"tomaxut/store/database"
+	"tomaxut/store/models"
 )
 
 type User struct {

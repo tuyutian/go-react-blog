@@ -2,11 +2,11 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	"maxotm/pkg/auth"
-	"maxotm/server/response"
-	"maxotm/store/database"
-	"maxotm/store/models"
 	"net/http"
+	"tomaxut/pkg/auth"
+	"tomaxut/server/response"
+	"tomaxut/store/database"
+	"tomaxut/store/models"
 )
 
 func Auth() gin.HandlerFunc {

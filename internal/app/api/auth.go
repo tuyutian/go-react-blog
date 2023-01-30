@@ -3,13 +3,13 @@ package api
 import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
-	"maxotm/internal/app/requests"
-	"maxotm/pkg/auth"
-	"maxotm/pkg/utils/validator"
-	"maxotm/server/response"
-	"maxotm/store/database"
-	"maxotm/store/models"
 	"net/http"
+	"tomaxut/internal/app/requests"
+	"tomaxut/pkg/auth"
+	"tomaxut/pkg/utils/validator"
+	"tomaxut/server/response"
+	"tomaxut/store/database"
+	"tomaxut/store/models"
 )
 
 type Auth struct {

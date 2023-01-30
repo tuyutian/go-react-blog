@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"maxotm/config"
-	"maxotm/server"
-	"maxotm/store/database"
-	"maxotm/store/logger"
-	"maxotm/store/models"
+	"tomaxut/config"
+	"tomaxut/server"
+	"tomaxut/store/database"
+	"tomaxut/store/logger"
+	"tomaxut/store/models"
 )
 
 func main() {
@@ -33,9 +33,6 @@ func main() {
 	router := gin.Default()
 
 	server.InitRouter(router)
-	/*if err := endless.ListenAndServe(config.Get().Addr, router); err != nil {
-		fmt.Println(err.Error())
-	}*/
 
 	_ = router.Run(config.Get().Addr)
 }

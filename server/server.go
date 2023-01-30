@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
-	"maxotm/internal/app/api"
-	"maxotm/server/middleware"
-	"maxotm/server/response"
 	"net/http"
+	"tomaxut/internal/app/api"
+	"tomaxut/server/middleware"
+	"tomaxut/server/response"
 )
 
 func InitRouter(router *gin.Engine) *gin.Engine {

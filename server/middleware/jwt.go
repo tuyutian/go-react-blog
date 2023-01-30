@@ -2,9 +2,9 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	"maxotm/pkg/auth"
-	"maxotm/server/response"
 	"net/http"
+	"tomaxut/pkg/auth"
+	"tomaxut/server/response"
 )
 
 func JWT(guard string) gin.HandlerFunc {

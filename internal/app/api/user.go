@@ -2,10 +2,10 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
-	"maxotm/internal/app/requests"
-	"maxotm/internal/app/services"
-	"maxotm/pkg/utils/validator"
-	"maxotm/server/response"
+	"tomaxut/internal/app/requests"
+	"tomaxut/internal/app/services"
+	"tomaxut/pkg/utils/validator"
+	"tomaxut/server/response"
 )
 
 type User struct {

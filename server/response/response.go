@@ -2,8 +2,8 @@ package response
 
 import (
 	"github.com/gin-gonic/gin"
-	"maxotm/pkg/utils/paginate"
 	"net/http"
+	"tomaxut/pkg/utils/paginate"
 )
 
 const (

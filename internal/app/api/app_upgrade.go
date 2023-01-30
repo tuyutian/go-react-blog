@@ -4,10 +4,10 @@ import (
 	"errors"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
-	"maxotm/server/response"
-	"maxotm/store/database"
-	"maxotm/store/models"
 	"net/http"
+	"tomaxut/server/response"
+	"tomaxut/store/database"
+	"tomaxut/store/models"
 )
 
 type AppUpgrade struct {

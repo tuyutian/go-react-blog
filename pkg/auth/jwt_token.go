@@ -3,8 +3,8 @@ package auth
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
-	"maxotm/config"
 	"time"
+	"tomaxut/config"
 )
 
 type jwtCustomClaims struct {
