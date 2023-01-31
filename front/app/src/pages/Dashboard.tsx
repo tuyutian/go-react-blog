@@ -1,10 +1,11 @@
 import reactLogo from "@/assets/react.svg";
-import {useState} from "react";
+import React, {useState} from "react";
+import {Container} from "@mui/material";
 
 export default function Dashboard() {
     const [count, setCount] = useState(0)
 
-    return <div className="App">
+    return <Container fixed>
         <div>
             <a href="https://vitejs.dev" target="_blank">
                 <img src="/vite.svg" className="logo" alt="Vite logo"/>
@@ -25,5 +26,5 @@ export default function Dashboard() {
         <p className="read-the-docs">
             Click on the Vite and React logos to learn more
         </p>
-    </div>
+    </Container>
 }

@@ -4,6 +4,7 @@ import {FullScreenLoading} from "~/router/Router";
 import {observer} from "mobx-react";
 import React, {useEffect} from "react";
 import { stores } from "@/store";
+import Header from "@/layout/components/Header";
 
 interface Props {
 }
@@ -14,10 +15,11 @@ export const Index = observer(function (props: Props) {
         stores.commonStore.setGlobalLoading(true)
     },[])
     return globalLoading ? (
-                <div style={{minHeight: '75vh'}}>
-                    <Main />
-                    <Footer />
-                </div>
+                    <div>
+                        <Header />
+                        <Main />
+                        <Footer />
+                    </div>
             ) : <FullScreenLoading />
 
 });

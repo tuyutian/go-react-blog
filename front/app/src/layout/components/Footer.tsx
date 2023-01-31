@@ -7,11 +7,9 @@ const Footer = observer(function () {
     const navigateName = params.pathname;
     const {footerShow} = stores.commonStore
 
-    return footerShow ? (
-        <div>
-            Learn more about
-        </div>
-    ) : <></>
+    return <div className="">
+        tomaxut
+    </div>
 })
 
 export default Footer;
