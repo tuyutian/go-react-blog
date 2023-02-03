@@ -7,7 +7,7 @@ import (
 	"tomaxut/config"
 )
 
-type jwtCustomClaims struct {
+type JwtCustomClaims struct {
 	ID    uint
 	Guard string
 	jwt.StandardClaims
@@ -27,7 +27,7 @@ func New() *JwtToken {
 
 func (j *JwtToken) CreateUserToken(ID uint, guard string) (*Token, error) {
 	expiresAt := time.Now().Add(time.Hour * 24 * time.Duration(config.Get().JwtExpireDay)).Unix()
-	claims := &jwtCustomClaims{
+	claims := &JwtCustomClaims{
 		ID,
 		guard,
 		jwt.StandardClaims{
@@ -41,20 +41,20 @@ func (j *JwtToken) CreateUserToken(ID uint, guard string) (*Token, error) {
 	return &Token{Token: tokenString, ExpiresAt: expiresAt}, err
 }
 
-func (j *JwtToken) ParseToken(token string) (*jwtCustomClaims, error) {
-	tokenClaims, err := jwt.ParseWithClaims(token, &jwtCustomClaims{}, func(token *jwt.Token) (interface{}, error) {
+func (j *JwtToken) ParseToken(token string) (*JwtCustomClaims, error) {
+	tokenClaims, err := jwt.ParseWithClaims(token, &JwtCustomClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return []byte(config.Get().JwtSecret), nil
 	})
 
 	if tokenClaims != nil {
-		if claims, ok := tokenClaims.Claims.(*jwtCustomClaims); ok && tokenClaims.Valid {
+		if claims, ok := tokenClaims.Claims.(*JwtCustomClaims); ok && tokenClaims.Valid {
 			return claims, nil
 		}
 	}
 	return nil, err
 }
 
-func (j *JwtToken) JwtClaims(c *gin.Context) (*jwtCustomClaims, error) {
+func (j *JwtToken) JwtClaims(c *gin.Context) (*JwtCustomClaims, error) {
 	token := c.GetHeader("Authorization")
 	claims, err := j.ParseToken(token)
 	return claims, err

@@ -7,7 +7,7 @@ max_idle_conn: 100
 sql_debug: true
 
 jwt_secret: "your secret"
-jwt_expire_day: 100
+jwt_expire_day: 30
 
 redis_host: "127.0.0.1:6379"
 redis_password:
