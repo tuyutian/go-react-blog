@@ -1,12 +1,11 @@
-import '@/App.css'
-import Index from '@/layout/Index'
 import {BrowserRouter} from 'react-router-dom'
+import {Router} from "@/router/Router";
 
 function App() {
 
     return (
         <BrowserRouter>
-            <Index/>
+            <Router/>
         </BrowserRouter>
     )
 }

@@ -1,10 +1,13 @@
 import {observer} from "mobx-react";
-import {Box, Container, Typography} from "@mui/material";
+import {Box, Button, Container, IconButton, Typography} from "@mui/material";
 import AdbIcon from '@mui/icons-material/Adb';
-import React, {useState} from "react";
-
+import SearchIcon from '@mui/icons-material/Search';
+import React from "react";
+import "@/assets/styles/scss/index.scss"
+import {useNavigate} from "react-router-dom";
 
 export const Header = observer(function () {
+    const navigate = useNavigate();
     return (
         <header className="header">
             <Container fixed className="menu">
@@ -29,7 +32,7 @@ export const Header = observer(function () {
                 </Typography>
                 <Box>
                     <nav>
-                        <ul>
+                        <ul className="flex flex-row">
                             <li>123</li>
                             <li>123</li>
                             <li>123</li>
@@ -39,7 +42,12 @@ export const Header = observer(function () {
                 </Box>
                 <Box className="ml-auto"/>
                 <div>
-                    1231231
+                    <IconButton>
+                        <SearchIcon />
+                    </IconButton>
+                    <Button onClick={()=>navigate('/login')} variant="outlined" size="small">
+                        Sign up
+                    </Button>
                 </div>
             </Container>
         </header>

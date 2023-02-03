@@ -1,9 +1,13 @@
 import {lazy, Suspense} from 'react';
 import {RouteObject, useRoutes} from 'react-router-dom';
 import classNames from "classnames";
+import HomeLayout from "@/layout/HomeLayout/Index"
+import AdminLayout from "@/layout/AdminLayout/Index"
 
 const Page404Screen = lazy(() => import('~/layout/404'));
-const Dashboard = lazy(() => import('~/pages/Dashboard'));
+const Home = lazy(() => import('@/pages/Home/Index'));
+const Login = lazy(() => import('@/pages/Admin/Login'));
+const Dashboard = lazy(() => import('@/pages/Admin/Dashboard/Index'));
 
 
 export function FullScreenLoading(props: { loading?: boolean }) {
@@ -20,29 +24,37 @@ export function FullScreenLoading(props: { loading?: boolean }) {
 
 export const Router = () => {
     return (
-        <InnerRoutes />
+        <InnerRoutes/>
     );
 };
 
 const InnerRoutes = () => {
-    const PageRouter:RouteObject[] = [];
-
-    const routes: RouteObject[] =[
+    const routes: RouteObject[] = [
         {
-            path:'/',
-            element:<Dashboard />,
-            index:true,
+            path: '/',
+            element: <HomeLayout><Home/></HomeLayout>,
+            index: true,
+        },
+        {
+            path: '/login',
+            element: <Login/>,
+            index: true,
+        },
+        {
+            path: '/dashboard',
+            element: <AdminLayout><Dashboard/></AdminLayout>,
+            index: true,
         },
         {
             path: '*',
-            element: <Page404Screen />,
+            element: <Page404Screen/>,
         },
     ];
 
     const element = useRoutes(routes);
     return (
         <div>
-            <Suspense fallback={<FullScreenLoading />}>{element}</Suspense>
+            <Suspense fallback={<FullScreenLoading/>}>{element}</Suspense>
         </div>
     );
 };
