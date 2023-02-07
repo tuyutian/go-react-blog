@@ -34,9 +34,6 @@ func InitRouter(router *gin.Engine) *gin.Engine {
 		v1.POST("/login", auth.Login)
 		v1.POST("/register", auth.Register)
 
-		appUpgrade := new(api.AppUpgrade)
-		v1.GET("/check-app-upgrade/:platform", appUpgrade.Check)
-
 		v1.Use(middleware.JWT("user"))
 		v1.Use(middleware.Auth())
 

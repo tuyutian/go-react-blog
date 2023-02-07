@@ -3,6 +3,7 @@ package auth
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
+	"github.com/sirupsen/logrus"
 	"time"
 	"tomaxut/config"
 )
@@ -45,9 +46,9 @@ func (j *JwtToken) ParseToken(token string) (*JwtCustomClaims, error) {
 	tokenClaims, err := jwt.ParseWithClaims(token, &JwtCustomClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return []byte(config.Get().JwtSecret), nil
 	})
-
 	if tokenClaims != nil {
 		if claims, ok := tokenClaims.Claims.(*JwtCustomClaims); ok && tokenClaims.Valid {
+			logrus.WithFields(logrus.Fields{"claims": claims}).Debug(tokenClaims.Valid)
 			return claims, nil
 		}
 	}
@@ -56,6 +57,7 @@ func (j *JwtToken) ParseToken(token string) (*JwtCustomClaims, error) {
 
 func (j *JwtToken) JwtClaims(c *gin.Context) (*JwtCustomClaims, error) {
 	token := c.GetHeader("Authorization")
+	token = token[7:]
 	claims, err := j.ParseToken(token)
 	return claims, err
 }

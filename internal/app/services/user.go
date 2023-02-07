@@ -16,7 +16,6 @@ type User struct {
 
 func (u *User) Query(c *gin.Context) (*response.SuccessResponse, error) {
 	paginateParam := paginate.RequestParam(c)
-
 	items, total, err := u.repo.Paginate(paginateParam)
 
 	return &response.SuccessResponse{

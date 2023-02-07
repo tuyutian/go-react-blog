@@ -29,7 +29,7 @@ func (u *Auth) Register(c *gin.Context) {
 			Code:    http.StatusUnprocessableEntity,
 			Message: "用户名已被占用",
 			Errors: map[string][]string{
-				"username": []string{"用户名已被占用"},
+				"username": {"用户名已被占用"},
 			},
 		})
 		return

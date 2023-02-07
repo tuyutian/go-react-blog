@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"gorm.io/gorm"
 	"strconv"
 	"time"
 )
@@ -12,9 +13,10 @@ var (
 )
 
 type Model struct {
-	ID        uint      `gorm:"primarykey" json:"id,omitempty"`
-	CreatedAt time.Time `json:"created_at,omitempty"`
-	UpdatedAt time.Time `json:"updated_at,omitempty"`
+	ID        uint           `gorm:"primaryKey;authIncrement" json:"id" `
+	CreatedAt time.Time      ` json:"created_at" `
+	UpdatedAt time.Time      ` json:"updated_at" `
+	DeletedAt gorm.DeletedAt `gorm:"index"  json:"deleted_at" `
 }
 
 func (m *Model) IDtoString() string {

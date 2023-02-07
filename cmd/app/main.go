@@ -25,7 +25,6 @@ func main() {
 
 	_ = db.AutoMigrate(
 		&models.User{},
-		&models.AppUpgrade{},
 	)
 
 	gin.SetMode(config.Get().GinMode)
