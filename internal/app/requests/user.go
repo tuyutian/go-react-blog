@@ -48,7 +48,7 @@ type RegisterRequest struct {
 
 func (r *RegisterRequest) Rules() govalidator.MapData {
 	return govalidator.MapData{
-		//"name":     []string{"between:1,20"},
+		"name":     []string{"between:1,20"},
 		"username": []string{"required", "between:5,20"},
 		"password": []string{"required", "between:5,20"},
 	}
