@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"tomaxut/config"
 	"tomaxut/server"
+	"tomaxut/server/middleware"
 	"tomaxut/store/database"
 	"tomaxut/store/logger"
 	"tomaxut/store/models"
@@ -25,12 +26,13 @@ func main() {
 
 	_ = db.AutoMigrate(
 		&models.User{},
+		&models.Post{},
 	)
 
 	gin.SetMode(config.Get().GinMode)
 
 	router := gin.Default()
-
+	router.Use(middleware.Cors())
 	server.InitRouter(router)
 
 	_ = router.Run(config.Get().Addr)

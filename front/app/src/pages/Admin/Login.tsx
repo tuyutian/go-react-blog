@@ -13,17 +13,24 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useNavigate} from "react-router-dom";
-
+import useSWR from 'swr'
+import LoginService from "@/service/LoginService";
+import {useState} from "react";
 const theme = createTheme();
 
 export default function Login() {
+
+    const [form, setForm] = useState(new FormData());
+    const {data,error,isLoading} = useSWR(form,LoginService.Login)
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
+        setForm(new FormData(event.currentTarget))
         console.log({
-            email: data.get('email'),
-            password: data.get('password'),
+            email: form.get('username'),
+            password: form.get('password'),
         });
+        console.log(data,error,isLoading);
     };
     const navigate = useNavigate();
     return (
@@ -49,10 +56,10 @@ export default function Login() {
                             margin="normal"
                             required
                             fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
+                            id="username"
+                            label="User Name"
+                            name="username"
+                            autoComplete="username"
                             autoFocus
                         />
                         <TextField
@@ -73,7 +80,6 @@ export default function Login() {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            onClick={()=>navigate('/dashboard')}
                             sx={{ mt: 3, mb: 2 }}
                         >
                             Sign In

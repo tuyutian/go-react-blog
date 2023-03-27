@@ -12,7 +12,7 @@ import (
 
 func InitRouter(router *gin.Engine) *gin.Engine {
 
-	err := router.SetTrustedProxies([]string{"192.168.40.20"})
+	err := router.SetTrustedProxies([]string{"192.168.20.55"})
 	if err != nil {
 		return nil
 	}
@@ -45,6 +45,10 @@ func InitRouter(router *gin.Engine) *gin.Engine {
 		v1.POST("/user", user.Store)
 		v1.PATCH("/user/:id", user.Update)
 		v1.DELETE("/user/:id", user.Destroy)
+
+		post := new(api.Post)
+		v1.GET("/post", post.Index)
+		v1.POST("/post", post.Store)
 	}
 	return router
 
