@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,23 +15,25 @@ import {useNavigate} from "react-router-dom";
 import useSWR from 'swr'
 import LoginService from "@/service/LoginService";
 import {useState} from "react";
+import {Response} from "@/enums/Response";
 const theme = createTheme();
 
 export default function Login() {
 
-    const [form, setForm] = useState(new FormData());
-    const {data,error,isLoading} = useSWR(form,LoginService.Login)
 
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        setForm(new FormData(event.currentTarget))
-        console.log({
-            email: form.get('username'),
-            password: form.get('password'),
-        });
-        console.log(data,error,isLoading);
+        setLoading(true)
+        LoginService.Login(new FormData(event.currentTarget)).then(res=>{
+            if (res.code===Response.Success) {
+                navigate('/admin')
+            }
+        }).finally(()=>{
+            setLoading(false)
+        })
     };
-    const navigate = useNavigate();
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">

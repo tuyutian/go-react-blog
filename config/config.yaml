@@ -6,6 +6,8 @@ dsn: "goblog:goblog123@tcp(127.0.0.1:3306)/goblog?charset=utf8mb4&parseTime=True
 max_idle_conn: 100
 sql_debug: true
 
+sql_lite: "blog.db"
+
 jwt_secret: "your secret"
 jwt_expire_day: 30
 

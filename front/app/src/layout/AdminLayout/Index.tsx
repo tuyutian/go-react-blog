@@ -15,10 +15,11 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
-import {mainListItems, secondaryListItems} from "@/pages/Admin/Dashboard/Components/ListItems";
+import {MainListItems, secondaryListItems} from "@/pages/Admin/Dashboard/Components/ListItems";
 import Box from '@mui/material/Box';
 import MuiAppBar, {AppBarProps as MuiAppBarProps} from '@mui/material/AppBar';
 import {styled} from "@mui/material/styles";
+import {Outlet} from "react-router-dom";
 
 const drawerWidth: number = 240;
 
@@ -69,7 +70,7 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})
         },
     }),
 );
-const AdminLayout = observer(function ({children}: { children: ReactNode }) {
+const AdminLayout = observer(function () {
     const [open, setOpen] = React.useState(true);
     const toggleDrawer = () => {
         setOpen(!open);
@@ -133,7 +134,7 @@ const AdminLayout = observer(function ({children}: { children: ReactNode }) {
                     </Toolbar>
                     <Divider/>
                     <List component="nav">
-                        {mainListItems}
+                        <MainListItems />
                         <Divider sx={{my: 1}}/>
                         {secondaryListItems}
                     </List>
@@ -151,7 +152,7 @@ const AdminLayout = observer(function ({children}: { children: ReactNode }) {
                     }}
                 >
                     <Toolbar/>
-                    {children}
+                    <Outlet />
                 </Box>
             </Box>
             <Footer/>
