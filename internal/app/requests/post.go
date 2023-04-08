@@ -1,6 +1,8 @@
 package requests
 
-import "github.com/thedevsaddam/govalidator"
+import (
+	"github.com/thedevsaddam/govalidator"
+)
 
 type PostRequest struct {
 }
@@ -19,6 +21,23 @@ func (r *PostRequest) Rules() govalidator.MapData {
 		"title":    []string{"require", "between:1,150"},
 		"subtitle": []string{"between:1,150"},
 		"content":  []string{"required"},
+	}
+	return rules
+}
+
+type DetailRequest struct {
+}
+
+func (r *DetailRequest) Messages() govalidator.MapData {
+	message := govalidator.MapData{
+		"id": []string{"required:详情id不能为空", "numeric:必须是数字类型"},
+	}
+	return message
+}
+
+func (r *DetailRequest) Rules() govalidator.MapData {
+	rules := govalidator.MapData{
+		"id": []string{"require", "numberic"},
 	}
 	return rules
 }

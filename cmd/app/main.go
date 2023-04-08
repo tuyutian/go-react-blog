@@ -1,9 +1,8 @@
 package main
 
 import (
+	"errors"
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/sirupsen/logrus"
 	"log"
 	"os"
 	"path"
@@ -16,6 +15,11 @@ import (
 	"tomaxut/store/database"
 	"tomaxut/store/logger"
 	"tomaxut/store/models"
+
+	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
+	"golang.org/x/crypto/bcrypt"
+	"gorm.io/gorm"
 )
 
 // 最终方案-全兼容
@@ -70,12 +74,24 @@ func main() {
 		fmt.Println("err open databases")
 		return
 	}
-
-	_ = db.AutoMigrate(
+	err = db.AutoMigrate(
 		&models.User{},
 		&models.Post{},
 	)
+	var pass string = "12345"
+	hash, err := bcrypt.GenerateFromPassword([]byte(pass), bcrypt.DefaultCost)
+	var maxotm models.User
 
+	result := database.DB.First(&maxotm, "username = ? and status = ?", "maxotm", 0)
+	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+		maxotm := models.User{
+			Username: "maxotm",
+			Status:   0,
+			Password: string(hash),
+		}
+		database.DB.Create(&maxotm)
+	}
+	logrus.Debug(maxotm)
 	gin.SetMode(config.Get().GinMode)
 
 	router := gin.Default()

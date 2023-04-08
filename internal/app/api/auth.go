@@ -1,8 +1,7 @@
 package api
 
 import (
-	"github.com/gin-gonic/gin"
-	"golang.org/x/crypto/bcrypt"
+	"fmt"
 	"net/http"
 	"tomaxut/internal/app/requests"
 	"tomaxut/pkg/auth"
@@ -10,6 +9,9 @@ import (
 	"tomaxut/server/response"
 	"tomaxut/store/database"
 	"tomaxut/store/models"
+
+	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type Auth struct {
@@ -69,12 +71,14 @@ func (u *Auth) Login(c *gin.Context) {
 		return
 	}
 
+	fmt.Println(c.PostForm("username"))
 	var user models.User
 	if err := database.DB.First(&user, "username = ? and status = 0 ", c.PostForm("username")).Error; err != nil {
 		response.NotFound(c, "用户不存在")
 		return
 	}
-
+	fmt.Println(user.Password)
+	fmt.Println(c.PostForm("password"))
 	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(c.PostForm("password")))
 	if err != nil {
 		response.Forbidden(c, "密码有误")

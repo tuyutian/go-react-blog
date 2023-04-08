@@ -1,12 +1,14 @@
 package services
 
 import (
-	"github.com/gin-gonic/gin"
+	"strconv"
 	"tomaxut/pkg/auth"
 	"tomaxut/pkg/utils/paginate"
 	"tomaxut/server/response"
 	"tomaxut/store/models"
 	"tomaxut/store/repositories"
+
+	"github.com/gin-gonic/gin"
 )
 
 type Post struct {
@@ -37,6 +39,18 @@ func (p *Post) Store(c *gin.Context) error {
 	m.Title = c.PostForm("title")
 	m.UserId = auth.New().JwtUserId(c)
 	return p.repo.Create(&m)
+}
+
+func (p *Post) Find(c *gin.Context) (*response.SuccessResponse, error) {
+	id, err := strconv.Atoi(c.PostForm("id"))
+	if err != nil {
+		return &response.SuccessResponse{}, err
+	}
+
+	result, err := p.repo.Find(id)
+	return &response.SuccessResponse{
+		Data: result,
+	}, err
 }
 
 func NewPost() *Post {

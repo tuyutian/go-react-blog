@@ -1,16 +1,19 @@
 package database
 
 import (
+	"tomaxut/config"
+
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	"tomaxut/config"
 )
 
 var DB *gorm.DB
 
 func InitDB() (*gorm.DB, error) {
 	conf := config.Get()
-	db, err := gorm.Open(sqlite.Open(conf.SQLLite), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open(conf.SQLLite), &gorm.Config{
+		DisableForeignKeyConstraintWhenMigrating: true,
+	})
 
 	if err == nil {
 		if conf.SQLDebug {

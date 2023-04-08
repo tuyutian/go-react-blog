@@ -25,6 +25,12 @@ func (*Post) Get() ([]models.Post, error) {
 	return items, result.Error
 }
 
+func (*Post) Find(id int) (models.Post, error) {
+	var post models.Post
+	result := database.DB.First(&post, id)
+	return post, result.Error
+}
+
 func (*Post) Count() int64 {
 	var count int64
 	database.DB.Model(models.Post{}).Count(&count)

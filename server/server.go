@@ -2,12 +2,13 @@ package server
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/sirupsen/logrus"
 	"net/http"
 	"tomaxut/internal/app/api"
 	"tomaxut/server/middleware"
 	"tomaxut/server/response"
+
+	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 )
 
 func InitRouter(router *gin.Engine) *gin.Engine {
@@ -48,6 +49,7 @@ func InitRouter(router *gin.Engine) *gin.Engine {
 
 		post := new(api.Post)
 		v1.GET("/post", post.Index)
+		v1.GET("/post/:id", post.Show)
 		v1.POST("/post", post.Store)
 	}
 	return router

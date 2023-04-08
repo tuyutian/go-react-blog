@@ -1,11 +1,12 @@
 package api
 
 import (
-	"github.com/gin-gonic/gin"
 	"tomaxut/internal/app/requests"
 	"tomaxut/internal/app/services"
 	"tomaxut/pkg/utils/validator"
 	"tomaxut/server/response"
+
+	"github.com/gin-gonic/gin"
 )
 
 type Post struct {
@@ -33,4 +34,19 @@ func (*Post) Store(ctx *gin.Context) {
 	}
 
 	response.Created(ctx)
+}
+
+func (*Post) Show(ctx *gin.Context) {
+	validated := validator.Validate(ctx, &requests.DetailRequest{})
+
+	if len(validated) > 0 {
+		response.UnprocessableEntity(ctx, validated)
+		return
+	}
+	result, err := services.NewPost().Find(ctx)
+	if err != nil {
+		response.Fail(ctx, err)
+		return
+	}
+	response.Success(ctx, result)
 }
