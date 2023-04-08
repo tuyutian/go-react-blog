@@ -67,7 +67,6 @@ func main() {
 		return
 	}
 
-	println(getCurrentAbPath())
 	logrus.Infoln(getCurrentAbPath())
 	db, err := database.InitDB()
 	if err != nil {
@@ -91,7 +90,6 @@ func main() {
 		}
 		database.DB.Create(&maxotm)
 	}
-	logrus.Debug(maxotm)
 	gin.SetMode(config.Get().GinMode)
 
 	router := gin.Default()
