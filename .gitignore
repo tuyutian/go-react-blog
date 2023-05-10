@@ -2,3 +2,5 @@
 *.iml
 /*.exe
 logs
+go.mod
+go.sum
