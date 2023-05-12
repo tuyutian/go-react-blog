@@ -23,7 +23,7 @@ func InitRouter(router *gin.Engine) *gin.Engine {
 		// worthy parts of that header.
 		// Otherwise, simply return the direct client IP
 		fmt.Printf("ClientIP: %s\n", c.ClientIP())
-		logrus.Warning("test")
+		logrus.Warning("ClientIP: %s\n", c.ClientIP())
 		response.Success(c, &response.SuccessResponse{
 			Code: http.StatusOK,
 		})
@@ -31,6 +31,8 @@ func InitRouter(router *gin.Engine) *gin.Engine {
 
 	v1 := router.Group("/api/v1")
 	{
+		rabbit := new(api.Rabbit)
+		v1.GET("/rabbit", rabbit.SendMessage)
 		auth := new(api.Auth)
 		v1.POST("/login", auth.Login)
 		v1.POST("/register", auth.Register)

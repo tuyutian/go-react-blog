@@ -20,6 +20,7 @@ type Config struct {
 	RedisIdleTimeout time.Duration `yaml:"redis_idle_timeout"`
 	SQLDebug         bool          `yaml:"sql_debug"`
 	SQLLite          string        `yaml:"sql_lite"`
+	RabbitHost       string        `yaml:"rabbit_host"`
 }
 
 var config *Config

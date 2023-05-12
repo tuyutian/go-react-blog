@@ -16,3 +16,5 @@ redis_password:
 redis_max_idle: 30
 redis_active: 30
 redis_idle_timeout: 200
+
+rabbit_host: "amqp://tomaxut:1635358408@114.132.167.155:5672/tomaxut"
